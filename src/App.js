@@ -34,7 +34,7 @@ function App() {
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center justify-start py-10">
       <h1 className="text-3xl font-extrabold text-center bg-yellow-400 border-4 border-black rounded-lg px-6 py-2 shadow-[4px_4px_0_#222] mb-8">
-        🔎 Anime Search
+        🔎 Get Anime
       </h1>
       <div className="flex gap-2 w-full max-w-xl mb-8">
         <input

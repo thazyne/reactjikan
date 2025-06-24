@@ -32,6 +32,6 @@ jobs:
           cd anime-search
           npm test -- --watchAll=false
 
-     - name: Trigger Render Deploy Hook
+      - name: Trigger Render Deploy Hook
         run: |
           curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
