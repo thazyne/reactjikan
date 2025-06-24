@@ -1,0 +1,37 @@
+# GitHub Actions workflow for deploying Dockerized React app to Render
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+
+      - name: Install dependencies
+        run: |
+          cd anime-search
+          npm ci
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: anime-search/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('anime-search/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run tests
+        run: |
+          cd anime-search
+          npm test -- --watchAll=false
+
+     - name: Trigger Render Deploy Hook
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
