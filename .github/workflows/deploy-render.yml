@@ -16,20 +16,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd anime-search
           npm ci
 
       - name: Cache node modules
         uses: actions/cache@v4
         with:
-          path: anime-search/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('anime-search/package-lock.json') }}
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Run tests
         run: |
-          cd anime-search
           npm test -- --watchAll=false
 
       - name: Trigger Render Deploy Hook
